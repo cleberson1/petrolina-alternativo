@@ -1,31 +1,35 @@
 {
   "atualizado_em": "2026-11-02",
-  "locais": ["Terminal Central", "Cohab Massangano", "Vila Eduardo"],
+  "locais": ["KM-25", "Ponto Final (Centro)"],
   "rotas": [
     {
-      "origem": "Terminal Central",
-      "destino": "Cohab Massangano",
-      "empresa": "ATPI Projetos",
+      "origem": "KM-25",
+      "destino": "Ponto Final (Centro)",
+      "empresa": "COOPERTRANSSERTÃO",
       "itinerario_html": "terminal_cohab.html",
-      "observacao": "Via Praça da Matriz",
-      "itinerario": "Saída do Terminal Central, Av. Cardoso de Sá, Praça da Matriz, Av. Souza Filho e chegada à Cohab Massangano.",
+      "observacao": "",
       "horarios": {
-        "uteis":   ["05:30", "06:00", "06:30", "07:15", "08:00", "12:00", "17:30", "18:30"],
-        "sabado":  ["06:00", "09:00", "13:00"],
-        "domingo": [],
-        "feriado": ["07:00", "12:00"]
+       "uteis":   [
+           "05:50", "06:20", "06:30", "06:50", "07:10", "07:30", "08:00", "08:45", "09:30", "10:15", "11:15", "12:00", "12:45", "13:30", "14:30", "15:50", "16:40", "17:25", "18:00"
+          ],
+        "sabado":  [
+          "06:00", "06:30", "06:50", "07:10", "07:30", "08:00", "09:00", "10:00", "10:45", "11:30", "12:15", "13:30", "15:00", "16:40", "18:00"
+          ],
+        "domingo": ["06:40", "07:00", "08:30", "10:00", "11:30", "13:00", "14:30", "16:00", "17:30"],
+        "feriado": ["06:40", "07:00", "08:30", "10:00", "11:30", "13:00", "14:30", "16:00", "17:30"]
       }
     },
     {
-      "origem": "Terminal Central",
-      "destino": "Cohab Massangano",
-      "empresa": "AVV",
-      "saida": "Terminal Central (Plataforma B)",
+      "origem": "Ponto Final (Centro)",
+      "destino": "KM-25",
+      "empresa": "COOPERTRANSSERTÃO",
+      "itinerario_html": "terminal_cohab.html",
+      "observacao": "",
       "horarios": {
-        "uteis":   ["05:45", "06:20", "07:00", "12:15", "18:00"],
-        "sabado":  ["06:30", "10:00"],
+        "uteis":   [],
+        "sabado":  [],
         "domingo": [],
-        "feriado": ["07:30"]
+        "feriado": []
       }
     },
     {
