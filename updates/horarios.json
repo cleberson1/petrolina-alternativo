@@ -33,22 +33,23 @@
       }
     },
     {
-      "origem": "Terminal Central",
-      "destino": "Vila Eduardo",
+      "origem": "Ponto Final (Centro)",
+      "destino": "C1, N1, N2, N3",
       "empresa": "ATPI Projetos",
-      "observacao": "Direto",
-      "itinerario": "Saída do Terminal Central, Av. Fernando Idalino, Rua Projetada e chegada à Vila Eduardo.",
+      "observacao": "Os horários das 22:10 nos dias de semana só funciona durante o período de aula das faculdades e dias que se tem aulas, em caso de feriados pode não haver esse horário, para saber mais sobre entre em contato com a associação.",
+      "itinerario_html": "terminal_cohab.html",
       "horarios": {
-        "uteis":   ["06:00", "07:00", "11:30", "17:00"],
-        "sabado":  ["07:00", "12:00"],
-        "domingo": ["08:00"],
-        "feriado": ["08:00"]
+        "uteis":   [],
+        "sabado":  [],
+        "domingo": [],
+        "feriado": []
       }
     },
     {
       "origem": "Cohab Massangano",
       "destino": "Terminal Central",
       "empresa": "AVV",
+      "observacao": "",
       "horarios": {
         "uteis":   ["05:45", "06:45", "07:30", "12:30", "18:00"],
         "sabado":  ["06:30", "10:00"],
