@@ -1,15 +1,41 @@
 {
-  "atualizado_em": "2026-11-02",
+  "atualizado_em": "2023-02-01",
   "legislacao": {
-    "tipo": "Portaria",
-    "numero": "XX/2026 (exemplo)",
-    "descricao": "Fixa as tarifas do transporte alternativo e complementar de Petrolina.",
-    "url": "https://petrolina.pe.gov.br"
+    "tipo": "Decreto",
+    "numero": "007/2023",
+    "descricao": "Concede reajuste à tarifa de transporte complementar e transporte coletivo de passageiros do Município de Petrolina e adota outras providências.",
+    "url": "https://petrolina.pe.gov.br/decreto-no-007-2023-reajuste-a-tarifa-de-transporte-complementar-e-transporte-coletivo-de-passageiros/"
   },
-  "colunas": ["Trecho", "Inteira", "Estudante"],
+  "colunas": ["Associação/Concessionária", "Linha/Projeto", "Tarifa Reajustada"],
   "linhas": [
-    ["Terminal Central → Cohab Massangano", "R$ 4,50", "R$ 2,25"],
-    ["Terminal Central → Vila Eduardo", "R$ 4,00", "R$ 2,00"],
-    ["Cohab Massangano → Terminal Central", "R$ 4,50", "R$ 2,25"]
+    ["Atlântico Transportes Ltda", "Zona Urbana do Município", "R$ 5,00"],
+    ["ATPI", "Projetos N1, N2, N3 e C1", "R$ 8,00"],
+    ["ATAPE", "Projetos N6, N7, N9 e C3", "R$ 8,00"],
+    ["ATACIPE Projetos", "Projetos N4, N5, C2 e Ass. Água Viva", "R$ 8,00"],
+    ["COOPERTRANSERTÃO", "Projeto N11", "R$ 8,00"],
+    ["COOPERTRANSERTO", "Projeto N10", "R$ 8,00"],
+    ["COOPERTRANSERTÃO", "Projeto N8", "R$ 8,00"],
+    ["COOPERTRANSERTO", "Terra da Liberdade", "R$ 8,00"],
+    ["COOPERTRANSERTÃO", "Assentamento Mandacaru", "R$ 8,00"],
+    ["COOTRASCOMPE", "Bebedouro e Nova Descoberta", "R$ 13,50"],
+    ["COOTRASCOMPE", "Izacolândia", "R$ 15,50"],
+    ["COOPERTRANSERTÃO", "Pedrinhas", "R$ 9,00"],
+    ["COOPERTRANSERTÃO", "Serrote do Urubu", "R$ 9,00"],
+    ["COOPERTRANSERTÃO", "Pedra Grande", "R$ 9,00"],
+    ["COOPERTRANSERTÃO", "Muquém", "R$ 9,00"],
+    ["COOPERTRANSERTÃO", "Roçado", "R$ 7,50"],
+    ["ATACIPE", "Tapera", "R$ 9,00"],
+    ["ATACIPE", "Agrovila Massangano", "R$ 7,50"],
+    ["ATACIPE", "Roçado / Rodeadouro", "R$ 7,50"],
+    ["COOPERTRANSERTÃO", "Projeto Maria Tereza", "R$ 10,00"],
+    ["COOPERTRANSERTÃO", "Morada Nova", "R$ 19,50"],
+    ["COOPERTRANSERTÃO", "Barra Franca", "R$ 19,50"],
+    ["COOPERTRANSERTÃO", "Satisfeito I e II", "R$ 19,50"],
+    ["COOPERTRANSERTÃO", "Situo Cabaceira", "R$ 19,50"],
+    ["COOPERTRANSERTÃO", "Sitio Divisa", "R$ 19,50"],
+    ["COOPERTRANSERTÃO", "Situo Queimada Nova", "R$ 19,50"],
+    ["COOPERTRANSERTÃO", "Pontal Lajedo", "R$ 19,50"],
+    ["COOPERTRANSERTÃO", "Ponta de Serra", "R$ 10,50"],
+    ["COOPERTRANSERTÃO", "Bom Jardim", "R$ 13,00"]
   ]
 }
