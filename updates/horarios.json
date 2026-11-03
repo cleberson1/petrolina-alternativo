@@ -1,6 +1,6 @@
 {
   "atualizado_em": "2026-11-02",
-  "locais": ["KM-25", "Ponto Final (Centro)"],
+  "locais": ["KM-25", "Ponto Final (Centro)", "C1, N1, N2 e	N3", "N6, N7, N9 e C3", "Assentamento Mandacaru"],
   "rotas": [
     {
       "origem": "KM-25",
@@ -9,12 +9,8 @@
       "itinerario_html": "terminal_cohab.html",
       "observacao": "",
       "horarios": {
-       "uteis":   [
-           "05:50", "06:20", "06:30", "06:50", "07:10", "07:30", "08:00", "08:45", "09:30", "10:15", "11:15", "12:00", "12:45", "13:30", "14:30", "15:50", "16:40", "17:25", "18:00"
-          ],
-        "sabado":  [
-          "06:00", "06:30", "06:50", "07:10", "07:30", "08:00", "09:00", "10:00", "10:45", "11:30", "12:15", "13:30", "15:00", "16:40", "18:00"
-          ],
+       "uteis":   ["05:50", "06:20", "06:30", "06:50", "07:10", "07:30", "08:00", "08:45", "09:30", "10:15", "11:15", "12:00", "12:45", "13:30", "14:30", "15:50", "16:40", "17:25", "18:00"],
+        "sabado":  ["06:00", "06:30", "06:50", "07:10", "07:30", "08:00", "09:00", "10:00", "10:45", "11:30", "12:15", "13:30", "15:00", "16:40", "18:00"],
         "domingo": ["06:40", "07:00", "08:30", "10:00", "11:30", "13:00", "14:30", "16:00", "17:30"],
         "feriado": ["06:40", "07:00", "08:30", "10:00", "11:30", "13:00", "14:30", "16:00", "17:30"]
       }
@@ -26,35 +22,75 @@
       "itinerario_html": "terminal_cohab.html",
       "observacao": "",
       "horarios": {
-        "uteis":   [],
-        "sabado":  [],
-        "domingo": [],
-        "feriado": []
+        "uteis":   ["05:20", "06:10", "07:10", "08:00", "09:00", "09:45", "10:30", "11:15", "12:00", "12:30", "13:10", "13:50", "14:30", "15:10", "15:50", "16:30", "17:00", "18:15", "22:00"],
+        "sabado":  ["05:20", "07:00", "08:00", "09:00", "09:45", "10:30", "11:15", "12:00", "12:30", "13:30", "14:30", "15:10", "16:00", "17:00", "18:00"],
+        "domingo": ["07:00", "08:30", "10:00", "11:30", "13:00", "14:30", "16:00", "17:30"],
+        "feriado": ["07:00", "08:30", "10:00", "11:30", "13:00", "14:30", "16:00", "17:30"]
       }
     },
     {
       "origem": "Ponto Final (Centro)",
-      "destino": "C1, N1, N2, N3",
+      "destino": "Assentamento Mandacaru",
+      "empresa": "COOPERTRANSSERTÃO",
+      "itinerario_html": "terminal_cohab.html",
+      "observacao": "",
+      "horarios": {
+        "uteis":   ["06:00", "08:50", "12:00", "15:00", "17:00"],
+        "sabado":  ["06:00", "08:50", "12:00", "15:00"],
+        "domingo": ["07:00", "16:00"],
+        "feriado": ["07:00", "16:00"]
+      }
+    },
+    {
+      "origem": "Ponto Final (Centro)",
+      "destino": "N6, N7, N9 e C3 - Via C1",
+      "empresa": "ATAPE",
+      "itinerario_html": "terminal_cohab.html",
+      "observacao": "A viagem dura em média 1h a partir da saída do ponto final",
+      "horarios": {
+        "uteis":   ["04:50", "05:40", "06:00", "06:50", "08:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:10"],
+        "sabado":  ["06:00", "08:00", "10:00", "12:00", "14:00", "17:00", "18:00"],
+        "domingo": ["06:00", "09:00", "14:00", "18:00"],
+        "feriado": ["06:00", "09:00", "14:00", "18:00"]
+      }
+    },
+    {
+      "origem": "Ponto Final (Centro)",
+      "destino": "N6, N7, N9 e C3 - Via N9",
+      "empresa": "ATAPE",
+      "itinerario_html": "terminal_cohab.html",
+      "observacao": "A viagem dura em média 1h a partir da saída do ponto final",
+      "horarios": {
+        "uteis":   ["05:30", "06:15", "07:00", "09:00", "10:20", "11:20", "12:20", "13:20", "14:20", "15:20", "16:20", "17:20", "18:20", "22:20"],
+        "sabado":  ["06:00", "07:00", "09:00", "11:00", "13:00", "15:00", "16:00"],
+        "domingo": ["07:00", "11:00", "16:00"],
+        "feriado": ["07:00", "11:00", "16:00"]
+      }
+    },
+    {
+      "origem": "Ponto Final (Centro)",
+      "destino": "C1, N1, N2 e N3",
       "empresa": "ATPI Projetos",
       "observacao": "Os horários das 22:10 nos dias de semana só funciona durante o período de aula das faculdades e dias que se tem aulas, em caso de feriados pode não haver esse horário, para saber mais sobre entre em contato com a associação.",
       "itinerario_html": "terminal_cohab.html",
       "horarios": {
-        "uteis":   [],
-        "sabado":  [],
-        "domingo": [],
-        "feriado": []
+        "uteis":   ["05:50", "06:10", "06:30", "07:00", "08:10", "09:10", "10:10", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:10", "19:10", "22:10"],
+        "sabado":  ["06:00", "07:00", "08:00", "08:30", "09:30", "10:30", "11:50", "12:50", "13:30", "14:30", "15:30", "16:30", "18:00"],
+        "domingo": ["06:00", "09:00", "12:00", "15:00", "18:00"],
+        "feriado": ["06:00", "09:00", "12:00", "15:00", "18:00"]
       }
     },
     {
-      "origem": "Cohab Massangano",
-      "destino": "Terminal Central",
-      "empresa": "AVV",
-      "observacao": "",
+      "origem": "C1, N1, N2 e N3",
+      "destino": "Ponto Final (Centro)",
+      "empresa": "ATPI Projetos",
+      "observacao": "Os horários das 22:10 nos dias de semana só funciona durante o período de aula das faculdades e dias que se tem aulas, em caso de feriados pode não haver esse horário, para saber mais sobre entre em contato com a associação.",
+      "itinerario_html": "terminal_cohab.html",
       "horarios": {
-        "uteis":   ["05:45", "06:45", "07:30", "12:30", "18:00"],
-        "sabado":  ["06:30", "10:00"],
-        "domingo": ["09:00"],
-        "feriado": ["07:30"]
+        "uteis":   ["05:45", "06:10"],
+        "sabado":  ["06:00"],
+        "domingo": [],
+        "feriado": []
       }
     }
   ]
