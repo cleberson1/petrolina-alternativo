@@ -1,0 +1,54 @@
+{
+  "atualizado_em": "2026-11-02",
+  "empresas": [
+    {
+      "nome": "Associação dos Transportadores dos Projetos de Irrigação Senador Nilo Coelho",
+      "sigla": "ATPI Projetos",
+      "logo": "atpi.png",
+      "telefone": "",
+      "presidente":      { "nome": "João",    "telefone": "(87) 98861-3549" },
+      "vice_presidente": { "nome": "Antônio", "telefone": "(87) 99150-4061" },
+      "secretario":      { "nome": "Karla",   "telefone": "(87) 98112-5010" }
+    },
+    {
+      "nome": "Associação dos Transportadores Alternativos e Complementares de Passageiros dos Projetos de Irrigação Senador Nilo Coelho",
+      "sigla": "ATACIPE Projetos",
+      "logo": "atacipe.png",
+      "telefone": "",
+      "presidente":      { "nome": "", "telefone": "" },
+      "vice_presidente": { "nome": "",  "telefone": "" },
+      "diretor":         { "nome": "", "telefone": "" },
+      "secretario":      { "nome": "",   "telefone": "" }
+    },
+    {
+      "nome": "Cooperativa dos Proprietários de Transportes do Vale do São Francisco",
+      "sigla": "COOPERTRANSSERTÃO",
+      "logo": "coopertranssertao.jpg",
+      "telefone": "",
+      "presidente":      { "nome": "", "telefone": "" },
+      "vice_presidente": { "nome": "",  "telefone": "" },
+      "diretor":         { "nome": "", "telefone": "" },
+      "secretario":      { "nome": "",   "telefone": "" }
+    },
+    {
+      "nome": "Associação dos Transportadores Alternativos e Complementares de Passageiros dos Projetos Irrigados de Petrolina",
+      "sigla": "ATAPE",
+      "logo": "atape.jpg",
+      "telefone": "",
+      "presidente":      { "nome": "", "telefone": "" },
+      "vice_presidente": { "nome": "",  "telefone": "" },
+      "diretor":         { "nome": "", "telefone": "" },
+      "secretario":      { "nome": "",   "telefone": "" }
+    },
+    {
+      "nome": "Cooperativa dos Transportadores Complementares de Petrolina-PE",
+      "sigla": "COOTRASCOMPE",
+      "logo": "cootrascompe.jpg",
+      "telefone": "",
+      "presidente":      { "nome": "", "telefone": "" },
+      "vice_presidente": { "nome": "",  "telefone": "" },
+      "diretor":         { "nome": "", "telefone": "" },
+      "secretario":      { "nome": "",   "telefone": "" }
+    }
+  ]
+}

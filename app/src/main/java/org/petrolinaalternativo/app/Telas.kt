@@ -1,7 +1,11 @@
 package org.petrolinaalternativo.app
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -25,11 +29,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.window.DialogProperties
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
 
-private enum class Tela { INICIAL, HORARIOS, SOBRE, CONTATOS }
+private enum class Tela { INICIAL, HORARIOS, TARIFAS, SOBRE, CONTATOS }
 
 /** Cor de fundo do app: CMYK C25 M5 Y0 K9 = RGB #AEDCE8. */
 val CorFundo = Color(0xFFAEDCE8)
@@ -43,7 +52,17 @@ private const val EMAIL_CONTATO = "carlos.web2010@hotmail.com"
 @Composable
 fun AppPetrolina() {
     val contexto = LocalContext.current
-    val dados = remember { carregarDados(contexto) }
+    var dados by remember { mutableStateOf(carregarDados(contexto)) }
+    // Quando o download desta abertura termina, recarrega os dados sem precisar reabrir o app
+    val pedidoId = AtualizadorWorker.pedidoAtualId
+    val infoAtual by remember(pedidoId) {
+        if (pedidoId == null) flowOf(null)
+        else WorkManager.getInstance(contexto).getWorkInfoByIdFlow(pedidoId)
+    }.collectAsState(initial = null)
+    val atualizacaoConcluida = infoAtual?.state == WorkInfo.State.SUCCEEDED
+    LaunchedEffect(atualizacaoConcluida) {
+        if (atualizacaoConcluida) dados = carregarDados(contexto)
+    }
     var tela by rememberSaveable { mutableStateOf(Tela.INICIAL) }
     var origem by rememberSaveable { mutableStateOf("") }
     var destino by rememberSaveable { mutableStateOf("") }
@@ -75,6 +94,11 @@ fun AppPetrolina() {
                             onClick = { ir(Tela.INICIAL) }
                         )
                         NavigationDrawerItem(
+                            label = { Text("Tarifas") },
+                            selected = tela == Tela.TARIFAS,
+                            onClick = { ir(Tela.TARIFAS) }
+                        )
+                        NavigationDrawerItem(
                             label = { Text("Contatos das empresas") },
                             selected = tela == Tela.CONTATOS,
                             onClick = { ir(Tela.CONTATOS) }
@@ -94,7 +118,7 @@ fun AppPetrolina() {
                     topBar = {
                         TopAppBar(
                             // Na tela inicial o nome fica abaixo da logo, não na barra
-							title = { if (tela != Tela.INICIAL) Text("Petrolina Alternativo", fontWeight = FontWeight.Bold) },
+                            title = { if (tela != Tela.INICIAL) Text("Petrolina Alternativo", fontWeight = FontWeight.Bold) },
                             colors = TopAppBarDefaults.topAppBarColors(containerColor = CorFundo),
                             actions = {
                                 IconButton(onClick = { escopo.launch { estadoDrawer.open() } }) {
@@ -124,6 +148,7 @@ fun AppPetrolina() {
                         Tela.HORARIOS -> TelaHorarios(dados, origem, destino, modificador) {
                             tela = Tela.INICIAL
                         }
+                        Tela.TARIFAS -> TelaTarifas(dados, modificador) { tela = Tela.INICIAL }
                         Tela.SOBRE -> TelaSobre(modificador) { tela = Tela.INICIAL }
                         Tela.CONTATOS -> TelaContatos(dados, modificador) { tela = Tela.INICIAL }
                     }
@@ -250,12 +275,20 @@ fun TelaHorarios(
     modifier: Modifier = Modifier,
     aoVoltar: () -> Unit
 ) {
+    val contexto = LocalContext.current
     val hoje = LocalDate.now()
     val rotulo = rotuloDia(hoje, dados.feriados)
     val rotas = rotasDe(dados, origem, destino)
     val linhas = linhasHorarios(rotas, hoje, dados.feriados)
     val proximo = proximoHorario(linhas.map { it.horario }, LocalTime.now())
-    val itinerarios = rotas.mapNotNull { r -> itinerarioDe(r)?.let { r to it } }
+    // Itinerário em HTML (se houver e o arquivo existir) ou, senão, o texto do JSON
+    val itinerarios = remember(rotas) {
+        rotas.mapNotNull { r ->
+            val html = htmlDoItinerario(contexto, r)
+            val texto = itinerarioDe(r)
+            if (html == null && texto == null) null else ItinerarioItem(r.empresa, html, texto)
+        }
+    }
     var mostrarItinerario by rememberSaveable { mutableStateOf(false) }
 
     Column(
@@ -291,14 +324,20 @@ fun TelaHorarios(
             if (mostrarItinerario) {
                 AlertDialog(
                     onDismissRequest = { mostrarItinerario = false },
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    properties = DialogProperties(usePlatformDefaultWidth = false),
                     title = { Text("Itinerário") },
                     text = {
                         Column(Modifier.verticalScroll(rememberScrollState())) {
-                            itinerarios.forEachIndexed { i, (rota, texto) ->
-                                if (itinerarios.size > 1 && rota.empresa != null) {
-                                    Text(rota.empresa, fontWeight = FontWeight.Bold)
+                            itinerarios.forEachIndexed { i, item ->
+                                if (itinerarios.size > 1 && item.empresa != null) {
+                                    Text(item.empresa, fontWeight = FontWeight.Bold)
                                 }
-                                Text(texto)
+                                if (item.html != null) {
+                                    PaginaHtml(item.html, Modifier.fillMaxWidth().height(360.dp))
+                                } else if (item.texto != null) {
+                                    Text(item.texto)
+                                }
                                 if (i < itinerarios.lastIndex) Spacer(Modifier.height(12.dp))
                             }
                         }
@@ -413,10 +452,12 @@ fun TelaContatos(dados: Dados, modifier: Modifier = Modifier, aoVoltar: () -> Un
         items(dados.empresas) { empresa ->
             Card(Modifier.fillMaxWidth()) {
                 Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    // Logo centralizada no topo, escalonada até as laterais do cartão
+                    // Logo centralizada no topo, com altura fixa (igual à da tela inicial)
+                    // e proporção preservada (ContentScale.Fit)
                     ImagemPorNome(
                         empresa.logo, "Logo de ${empresa.nome}",
-                        Modifier.fillMaxWidth(), ContentScale.FillWidth
+                        Modifier.fillMaxWidth().height(120.dp).padding(top = 8.dp),
+                        ContentScale.Fit
                     )
                     Column(
                         Modifier.fillMaxWidth().padding(16.dp),
@@ -429,10 +470,13 @@ fun TelaContatos(dados: Dados, modifier: Modifier = Modifier, aoVoltar: () -> Un
                             fontWeight = FontWeight.Bold,
                             textAlign = TextAlign.Center
                         )
-                        Text("Telefone: ${empresa.telefone}", textAlign = TextAlign.Center)
+                        if (empresa.telefone.isNotBlank()) {
+                            Text("Telefone: ${empresa.telefone}", textAlign = TextAlign.Center)
+                        }
                         LinhaPessoa("Presidente", empresa.presidente)
                         LinhaPessoa("Vice-presidente", empresa.vicePresidente)
                         LinhaPessoa("Diretor", empresa.diretor)
+                        LinhaPessoa("Secretário", empresa.secretario)
                     }
                 }
             }
@@ -448,7 +492,9 @@ fun TelaContatos(dados: Dados, modifier: Modifier = Modifier, aoVoltar: () -> Un
 @Composable
 private fun LinhaPessoa(cargo: String, pessoa: Pessoa?) {
     if (pessoa != null) {
-        Text("$cargo: ${pessoa.nome} — ${pessoa.telefone}", textAlign = TextAlign.Center)
+        val texto = if (pessoa.telefone.isBlank()) "$cargo: ${pessoa.nome}"
+        else "$cargo: ${pessoa.nome} — ${pessoa.telefone}"
+        Text(texto, textAlign = TextAlign.Center)
     }
 }
 
@@ -473,4 +519,114 @@ fun ImagemPorNome(
         )
     }
     if (id != 0) Image(painterResource(id), descricao, modifier, contentScale = escala)
+}
+
+private data class ItinerarioItem(val empresa: String?, val html: String?, val texto: String?)
+
+/**
+ * Mostra um HTML dentro do app. Seguro por construção: sem JavaScript, sem acesso a arquivos
+ * e sem carregar nada da internet (imagens só se estiverem embutidas no HTML como data URI);
+ * links dentro da página são ignorados.
+ */
+@Composable
+private fun PaginaHtml(html: String, modifier: Modifier = Modifier) {
+    AndroidView(
+        modifier = modifier,
+        factory = { ctx ->
+            WebView(ctx).apply {
+                settings.javaScriptEnabled = false
+                settings.allowFileAccess = false
+                settings.allowContentAccess = false
+                settings.blockNetworkLoads = true
+                setBackgroundColor(android.graphics.Color.WHITE)
+                webViewClient = object : WebViewClient() {
+                    override fun shouldOverrideUrlLoading(
+                        view: WebView?, request: WebResourceRequest?
+                    ): Boolean = true
+                }
+                loadDataWithBaseURL(null, html, "text/html", "UTF-8", null)
+            }
+        }
+    )
+}
+
+// ---------- Tarifas ----------
+
+@Composable
+fun TelaTarifas(dados: Dados, modifier: Modifier = Modifier, aoVoltar: () -> Unit) {
+    val contexto = LocalContext.current
+    val tarifas = dados.tarifas
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp)
+    ) {
+        Text("Tarifas", style = MaterialTheme.typography.headlineSmall)
+        Spacer(Modifier.height(12.dp))
+
+        if (tarifas == null) {
+            Text("Tarifas não disponíveis no momento.")
+        } else {
+            // Linha da legislação (portaria ou decreto) + ícone de link
+            tarifas.legislacao?.let { lei ->
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Column(Modifier.weight(1f)) {
+                        Text(
+                            listOfNotNull(lei.tipo, lei.numero?.let { "nº $it" }).joinToString(" "),
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        lei.descricao?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+                    }
+                    if (lei.url != null) {
+                        IconButton(onClick = { abrirLink(contexto, lei.url) }) {
+                            Icon(
+                                painterResource(R.drawable.ic_link),
+                                contentDescription = "Abrir a legislação"
+                            )
+                        }
+                    }
+                }
+                Spacer(Modifier.height(12.dp))
+            }
+            TabelaGenerica(tarifas.colunas, tarifas.linhas)
+        }
+
+        Spacer(Modifier.height(16.dp))
+        Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+            Button(onClick = aoVoltar) { Text("Voltar") }
+        }
+    }
+}
+
+private fun abrirLink(contexto: Context, url: String) {
+    if (!(url.startsWith("https://") || url.startsWith("http://"))) return
+    runCatching { contexto.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) }
+}
+
+/** Planilha: cabeçalho em negrito; a 1ª coluna é mais larga. */
+@Composable
+private fun TabelaGenerica(colunas: List<String>, linhas: List<List<String>>) {
+    Column(Modifier.fillMaxWidth()) {
+        LinhaGenerica(colunas, FontWeight.Bold)
+        HorizontalDivider()
+        linhas.forEach {
+            LinhaGenerica(it, FontWeight.Normal)
+            HorizontalDivider(thickness = 0.5.dp)
+        }
+    }
+}
+
+@Composable
+private fun LinhaGenerica(celulas: List<String>, peso: FontWeight) {
+    Row(Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
+        celulas.forEachIndexed { i, celula ->
+            Text(
+                celula,
+                Modifier.weight(if (i == 0) 2f else 1f).padding(end = 4.dp),
+                fontWeight = peso
+            )
+        }
+    }
 }

@@ -6,6 +6,7 @@ import android.app.Application
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        AtualizadorWorker.agendar(this)
+        AtualizadorWorker.agendar(this)        // verificação diária
+        AtualizadorWorker.atualizarAgora(this) // e também a cada abertura do app
     }
 }

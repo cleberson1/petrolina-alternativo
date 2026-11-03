@@ -30,7 +30,8 @@ data class Empresa(
     val telefone: String,
     val presidente: Pessoa?,
     val vicePresidente: Pessoa?,
-    val diretor: Pessoa?
+    val diretor: Pessoa?,
+    val secretario: Pessoa?
 )
 
 data class Horarios(
@@ -47,6 +48,7 @@ data class Rota(
     val saida: String?,     // ponto de saída (se ausente, usa a origem)
     val observacao: String?,
     val itinerario: String?,
+    val itinerarioHtml: String?,   // nome do arquivo .html em updates/itinerarios/
     val horarios: Horarios
 )
 
@@ -55,7 +57,19 @@ data class Dados(
     val locais: List<String>,
     val feriados: List<Feriado>,
     val empresas: List<Empresa>,
-    val rotas: List<Rota>
+    val rotas: List<Rota>,
+    val tarifas: Tarifas? = null
+)
+
+/** Portaria ou decreto que fixa as tarifas, com link opcional para o texto da lei. */
+data class Legislacao(val tipo: String, val numero: String?, val descricao: String?, val url: String?)
+
+/** Planilha de tarifas: colunas e linhas livres (definidas no tarifas.json). */
+data class Tarifas(
+    val atualizadoEm: String,
+    val legislacao: Legislacao?,
+    val colunas: List<String>,
+    val linhas: List<List<String>>
 )
 
 enum class TipoDia { UTIL, SABADO, DOMINGO, FERIADO }
@@ -74,7 +88,7 @@ private fun <T> lerComFallback(
     return parse(texto)
 }
 
-/** Carrega horários e feriados (arquivos separados), cada um com seu fallback. */
+/** Carrega horários, feriados e empresas (arquivos separados), cada um com seu fallback. */
 fun carregarDados(contexto: Context): Dados {
     val dados = lerComFallback(contexto, AtualizadorWorker.ARQUIVO_HORARIOS, "horarios.json") {
         parseDados(it)
@@ -84,7 +98,17 @@ fun carregarDados(contexto: Context): Dados {
             parseFeriados(it)
         }
     }.getOrDefault(emptyList())
-    return dados.copy(feriados = feriados)
+    val empresas = runCatching {
+        lerComFallback(contexto, AtualizadorWorker.ARQUIVO_EMPRESAS, "empresas.json") {
+            parseEmpresas(it)
+        }
+    }.getOrDefault(emptyList())
+    val tarifas = runCatching {
+        lerComFallback(contexto, AtualizadorWorker.ARQUIVO_TARIFAS, "tarifas.json") {
+            parseTarifas(it)
+        }
+    }.getOrNull()
+    return dados.copy(feriados = feriados, empresas = empresas, tarifas = tarifas)
 }
 
 // ---------- Parse (org.json nativo) ----------
@@ -95,28 +119,18 @@ private fun JSONObject.textoOuNulo(chave: String): String? =
 private fun JSONArray?.paraListaDeTexto(): List<String> =
     if (this == null) emptyList() else (0 until length()).map { getString(it) }
 
+/** Cargo ausente ou com nome em branco = null (não aparece no app). */
 private fun JSONObject.pessoa(chave: String): Pessoa? =
-    optJSONObject(chave)?.let { Pessoa(it.optString("nome"), it.optString("telefone")) }
+    optJSONObject(chave)?.let {
+        val nome = it.optString("nome").trim()
+        if (nome.isEmpty()) null else Pessoa(nome, it.optString("telefone").trim())
+    }
 
 /** Lança exceção se o JSON for inválido ou faltar campo obrigatório. */
 fun parseDados(texto: String): Dados {
-    val raiz = JSONObject(texto)
+    val raiz = JSONObject(texto.removePrefix("\uFEFF").trim())
     val atualizadoEm = raiz.getString("atualizado_em")
     val locais = raiz.getJSONArray("locais").paraListaDeTexto()
-
-    val empresasJson = raiz.optJSONArray("empresas") ?: JSONArray()
-    val empresas = (0 until empresasJson.length()).map {
-        val o = empresasJson.getJSONObject(it)
-        Empresa(
-            nome = o.getString("nome"),
-            sigla = o.textoOuNulo("sigla"),
-            logo = o.textoOuNulo("logo"),
-            telefone = o.optString("telefone"),
-            presidente = o.pessoa("presidente"),
-            vicePresidente = o.pessoa("vice_presidente"),
-            diretor = o.pessoa("diretor")
-        )
-    }
 
     val rotasJson = raiz.getJSONArray("rotas")
     val rotas = (0 until rotasJson.length()).map {
@@ -129,6 +143,9 @@ fun parseDados(texto: String): Dados {
             saida = o.textoOuNulo("saida"),
             observacao = o.textoOuNulo("observacao"),
             itinerario = o.textoOuNulo("itinerario"),
+            // Só aceita nome simples de arquivo .html (sem pastas), por segurança
+            itinerarioHtml = o.textoOuNulo("itinerario_html")
+                ?.takeIf { Regex("[A-Za-z0-9_-]+\\.html").matches(it) },
             horarios = Horarios(
                 uteis = h.optJSONArray("uteis").paraListaDeTexto(),
                 sabado = h.optJSONArray("sabado").paraListaDeTexto(),
@@ -138,14 +155,55 @@ fun parseDados(texto: String): Dados {
         )
     }
     require(locais.isNotEmpty() && rotas.isNotEmpty()) { "JSON sem locais ou rotas" }
-    return Dados(atualizadoEm, locais, emptyList(), empresas, rotas)
+    return Dados(atualizadoEm, locais, emptyList(), emptyList(), rotas)
 }
 
 // ---------- Regras de negócio ----------
 
+/** Empresas (arquivo empresas.json): lê "empresas". */
+fun parseEmpresas(texto: String): List<Empresa> {
+    val arr = JSONObject(texto.removePrefix("\uFEFF").trim()).getJSONArray("empresas")
+    return (0 until arr.length()).map {
+        val o = arr.getJSONObject(it)
+        Empresa(
+            nome = o.getString("nome"),
+            sigla = o.textoOuNulo("sigla"),
+            logo = o.textoOuNulo("logo"),
+            telefone = o.optString("telefone"),
+            presidente = o.pessoa("presidente"),
+            vicePresidente = o.pessoa("vice_presidente"),
+            diretor = o.pessoa("diretor"),
+            secretario = o.pessoa("secretario")
+        )
+    }
+}
+
+/** Tarifas (arquivo tarifas.json): "colunas", "linhas" e, opcional, "legislacao". */
+fun parseTarifas(texto: String): Tarifas {
+    val raiz = JSONObject(texto.removePrefix("\uFEFF").trim())
+    val colunas = raiz.getJSONArray("colunas").paraListaDeTexto()
+    require(colunas.isNotEmpty()) { "tarifas.json sem colunas" }
+    val linhasJson = raiz.getJSONArray("linhas")
+    val linhas = (0 until linhasJson.length()).map { i ->
+        val linha = linhasJson.getJSONArray(i)
+        // Ajusta cada linha ao número de colunas (completa com vazio ou corta o excesso)
+        List(colunas.size) { c -> linha.optString(c, "") }
+    }
+    val legislacao = raiz.optJSONObject("legislacao")?.let { o ->
+        Legislacao(
+            tipo = o.getString("tipo"),
+            numero = o.textoOuNulo("numero"),
+            descricao = o.textoOuNulo("descricao"),
+            // Só aceita link http/https
+            url = o.textoOuNulo("url")?.takeIf { it.startsWith("https://") || it.startsWith("http://") }
+        )
+    }
+    return Tarifas(raiz.optString("atualizado_em"), legislacao, colunas, linhas)
+}
+
 /** Feriados (arquivo feriados.json): lê "feriados" e valida cada entrada. */
 fun parseFeriados(texto: String): List<Feriado> {
-    val arr = JSONObject(texto).getJSONArray("feriados")
+    val arr = JSONObject(texto.removePrefix("\uFEFF").trim()).getJSONArray("feriados")
     return (0 until arr.length()).map {
         val o = arr.getJSONObject(it)
         val mesDia = o.textoOuNulo("dia_mes")
@@ -234,3 +292,22 @@ fun linhasHorarios(rotas: List<Rota>, data: LocalDate, feriados: List<Feriado>):
     rotas.flatMap { r ->
         horariosPara(r, data, feriados).map { LinhaHorario(it, r.saida ?: r.origem, r.empresa ?: "—") }
     }.sortedBy { runCatching { LocalTime.parse(it.horario) }.getOrDefault(LocalTime.MAX) }
+
+const val PASTA_ITINERARIOS = "itinerarios"
+
+/**
+ * HTML do itinerário da rota: usa o arquivo baixado (filesDir/itinerarios); se não houver,
+ * o embutido (assets/itinerarios). Retorna null se a rota não tem HTML ou o arquivo não existe.
+ */
+fun htmlDoItinerario(contexto: Context, rota: Rota): String? {
+    val nome = rota.itinerarioHtml ?: return null
+    val baixado = runCatching {
+        File(File(contexto.filesDir, PASTA_ITINERARIOS), nome)
+            .takeIf { it.exists() }?.readText(Charsets.UTF_8)
+    }.getOrNull()
+    if (!baixado.isNullOrBlank()) return baixado
+    return runCatching {
+        contexto.assets.open("$PASTA_ITINERARIOS/$nome").bufferedReader(Charsets.UTF_8)
+            .use { it.readText() }
+    }.getOrNull()?.takeIf { it.isNotBlank() }
+}

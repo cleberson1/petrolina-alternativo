@@ -1,0 +1,15 @@
+{
+  "atualizado_em": "2026-11-02",
+  "legislacao": {
+    "tipo": "Portaria",
+    "numero": "XX/2026 (exemplo)",
+    "descricao": "Fixa as tarifas do transporte alternativo e complementar de Petrolina.",
+    "url": "https://petrolina.pe.gov.br"
+  },
+  "colunas": ["Trecho", "Inteira", "Estudante"],
+  "linhas": [
+    ["Terminal Central → Cohab Massangano", "R$ 4,50", "R$ 2,25"],
+    ["Terminal Central → Vila Eduardo", "R$ 4,00", "R$ 2,00"],
+    ["Cohab Massangano → Terminal Central", "R$ 4,50", "R$ 2,25"]
+  ]
+}
