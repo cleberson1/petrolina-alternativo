@@ -1,0 +1,24 @@
+{
+  "atualizado_em": "2026-11-02",
+  "feriados": [
+    { "dia_mes": "01-01", "nome": "Confraternização Universal" },
+    { "dia_mes": "03-06", "nome": "Data Magna do Estado de Pernambuco" },
+    { "dias_apos_pascoa": -2, "nome": "Paixão de Cristo" },
+    { "dias_apos_pascoa": 0, "nome": "Páscoa" },
+    { "dia_mes": "04-21", "nome": "Tiradentes" },
+    { "dia_mes": "05-01", "nome": "Dia Mundial do Trabalhador" },
+    { "dias_apos_pascoa": 60, "nome": "Corpus Christi" },
+    { "dia_mes": "06-24", "nome": "São João" },
+    { "dia_mes": "08-15", "nome": "Nossa Senhora Rainha dos Anjos" },
+    { "dia_mes": "09-07", "nome": "Independência do Brasil" },
+    { "dia_mes": "09-21", "nome": "Emancipação Política do Município de Petrolina" },
+    { "dia_mes": "10-12", "nome": "Nossa Senhora Aparecida" },
+    { "dia_mes": "10-15", "nome": "Dia do Professor (apenas rede de ensino)", "parcial": true },
+    { "dia_mes": "10-19", "nome": "Dia do Comerciário" },
+    { "dia_mes": "10-28", "nome": "Servidor Público (apenas funcionalismo municipal)", "parcial": true },
+    { "dia_mes": "11-02", "nome": "Finados" },
+    { "dia_mes": "11-15", "nome": "Proclamação da República" },
+    { "dia_mes": "11-20", "nome": "Dia Nacional de Zumbi e da Consciência Negra" },
+    { "dia_mes": "12-25", "nome": "Natal" }
+  ]
+}

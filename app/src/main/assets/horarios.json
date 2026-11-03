@@ -1,0 +1,74 @@
+{
+  "atualizado_em": "2026-11-02",
+  "locais": ["Terminal Central", "Cohab Massangano", "Vila Eduardo"],
+  "empresas": [
+    {
+      "nome": "Cooperativa de Transporte Alternativo (exemplo)",
+      "sigla": "CTA",
+      "logo": "logo_coop.png",
+      "telefone": "(87) 99999-0000",
+      "presidente":      { "nome": "Fulano de Tal",     "telefone": "(87) 99999-0001" },
+      "vice_presidente": { "nome": "Beltrano da Silva", "telefone": "(87) 99999-0002" },
+      "diretor":         { "nome": "Ciclano Souza",     "telefone": "(87) 99999-0003" }
+    },
+    {
+      "nome": "Associação de Vans do Vale (exemplo)",
+      "sigla": "AVV",
+      "telefone": "(87) 98888-0000",
+      "presidente":      { "nome": "Maria Exemplo", "telefone": "(87) 98888-0001" },
+      "vice_presidente": { "nome": "João Exemplo",  "telefone": "(87) 98888-0002" },
+      "diretor":         { "nome": "Ana Exemplo",   "telefone": "(87) 98888-0003" }
+    }
+  ],
+  "rotas": [
+    {
+      "origem": "Terminal Central",
+      "destino": "Cohab Massangano",
+      "empresa": "CTA",
+      "observacao": "Via Praça da Matriz",
+      "itinerario": "Saída do Terminal Central, Av. Cardoso de Sá, Praça da Matriz, Av. Souza Filho e chegada à Cohab Massangano.",
+      "horarios": {
+        "uteis":   ["05:30", "06:00", "06:30", "07:15", "08:00", "12:00", "17:30", "18:30"],
+        "sabado":  ["06:00", "09:00", "13:00"],
+        "domingo": [],
+        "feriado": ["07:00", "12:00"]
+      }
+    },
+    {
+      "origem": "Terminal Central",
+      "destino": "Cohab Massangano",
+      "empresa": "AVV",
+      "saida": "Terminal Central (Plataforma B)",
+      "horarios": {
+        "uteis":   ["05:45", "06:20", "07:00", "12:15", "18:00"],
+        "sabado":  ["06:30", "10:00"],
+        "domingo": [],
+        "feriado": ["07:30"]
+      }
+    },
+    {
+      "origem": "Terminal Central",
+      "destino": "Vila Eduardo",
+      "empresa": "CTA",
+      "observacao": "Direto",
+      "itinerario": "Saída do Terminal Central, Av. Fernando Idalino, Rua Projetada e chegada à Vila Eduardo.",
+      "horarios": {
+        "uteis":   ["06:00", "07:00", "11:30", "17:00"],
+        "sabado":  ["07:00", "12:00"],
+        "domingo": ["08:00"],
+        "feriado": ["08:00"]
+      }
+    },
+    {
+      "origem": "Cohab Massangano",
+      "destino": "Terminal Central",
+      "empresa": "AVV",
+      "horarios": {
+        "uteis":   ["05:45", "06:45", "07:30", "12:30", "18:00"],
+        "sabado":  ["06:30", "10:00"],
+        "domingo": ["09:00"],
+        "feriado": ["07:30"]
+      }
+    }
+  ]
+}
