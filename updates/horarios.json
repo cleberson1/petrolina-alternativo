@@ -6,7 +6,7 @@
       "origem": "KM-25",
       "destino": "Ponto Final (Centro)",
       "empresa": "COOPERTRANSSERTÃO",
-      "itinerario_html": "terminal_cohab.html",
+      "itinerario_html": "km25.html",
       "observacao": "",
       "horarios": {
        "uteis":   ["05:50", "06:20", "06:30", "06:50", "07:10", "07:30", "08:00", "08:45", "09:30", "10:15", "11:15", "12:00", "12:45", "13:30", "14:30", "15:50", "16:40", "17:25", "18:00"],
@@ -19,7 +19,7 @@
       "origem": "Ponto Final (Centro)",
       "destino": "KM-25",
       "empresa": "COOPERTRANSSERTÃO",
-      "itinerario_html": "terminal_cohab.html",
+      "itinerario_html": "km25.html",
       "observacao": "",
       "horarios": {
         "uteis":   ["05:20", "06:10", "07:10", "08:00", "09:00", "09:45", "10:30", "11:15", "12:00", "12:30", "13:10", "13:50", "14:30", "15:10", "15:50", "16:30", "17:00", "18:15", "22:00"],
