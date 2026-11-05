@@ -45,7 +45,7 @@
       "origem": "Ponto Final (Centro)",
       "destino": "N6, N7, N9 e C3 - Via C1",
       "empresa": "ATAPE",
-      "itinerario_html": "terminal_cohab.html",
+      "itinerario_html": "",
       "observacao": "Os horários das 22:20 nos dias de semana só funciona durante o período de aula das faculdades e dias que se tem aulas, em caso de feriados pode não haver esse horário, para saber mais sobre entre em contato com a associação.",
       "horarios": {
         "uteis":   ["04:50", "05:40", "06:00", "06:50", "08:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:10"],
@@ -58,7 +58,7 @@
       "origem": "Ponto Final (Centro)",
       "destino": "N6, N7, N9 e C3 - Via N9",
       "empresa": "ATAPE",
-      "itinerario_html": "terminal_cohab.html",
+      "itinerario_html": "",
       "observacao": "Os horários das 22:20 nos dias de semana só funciona durante o período de aula das faculdades e dias que se tem aulas, em caso de feriados pode não haver esse horário, para saber mais sobre entre em contato com a associação.",
       "horarios": {
         "uteis":   ["05:30", "06:15", "07:00", "09:00", "10:20", "11:20", "12:20", "13:20", "14:20", "15:20", "16:20", "17:20", "18:20", "22:20"],
@@ -72,7 +72,7 @@
       "destino": "C1, N1, N2 e N3",
       "empresa": "ATPI Projetos",
       "observacao": "Os horários das 22:10 nos dias de semana só funciona durante o período de aula das faculdades e dias que se tem aulas, em caso de feriados pode não haver esse horário, para saber mais sobre entre em contato com a associação.",
-      "itinerario_html": "terminal_cohab.html",
+      "itinerario_html": "atpi.html",
       "horarios": {
         "uteis":   ["05:50", "06:10", "06:30", "07:00", "08:10", "09:10", "10:10", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:10", "19:10", "22:10"],
         "sabado":  ["06:00", "07:00", "08:00", "08:30", "09:30", "10:30", "11:50", "12:50", "13:30", "14:30", "15:30", "16:30", "18:00"],
@@ -85,7 +85,7 @@
       "destino": "Ponto Final (Centro)",
       "empresa": "ATPI Projetos",
       "observacao": "",
-      "itinerario_html": "terminal_cohab.html",
+      "itinerario_html": "atpi.html",
       "horarios": {
         "uteis":   ["05:45", "06:10"],
         "sabado":  ["06:00"],
