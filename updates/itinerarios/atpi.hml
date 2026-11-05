@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerário - ATPI</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --warning-bg: #fff3cd;
+            --warning-border: #ffeeba;
+            --warning-text: #856404;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .section-title {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px 8px 0 0;
+            margin-top: 30px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-top: none;
+        }
+
+        .day-group {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .day-group:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .day-title {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .route-item {
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .route-dest {
+            font-weight: bold;
+            color: var(--primary-color);
+            min-width: 250px;
+        }
+
+        .route-times {
+            color: #444;
+            flex: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #e8f4fd;
+            color: var(--secondary-color);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin: 2px;
+            font-weight: 600;
+        }
+
+        .alert-box {
+            background-color: var(--warning-bg);
+            border-left: 5px solid #ffc107;
+            color: var(--warning-text);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+
+        .alert-box strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .footer-notes {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .footer-notes h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .footer-notes ul {
+            padding-left: 20px;
+        }
+
+        .footer-notes li {
+            margin-bottom: 8px;
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 600px) {
+            .route-dest {
+                min-width: 100%;
+                margin-bottom: 2px;
+            }
+            h1 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Horários e Rotas</h1>
+            <p class="subtitle">Itinerário ATPI</p>
+        </header>
+
+        <div class="section-title">
+            🚌 SAÍDAS (HORÁRIOS E ROTAS)
+        </div>
+        <div class="card">
+            
+            <!-- SEGUNDA À SEXTA -->
+            <div class="day-group">
+                <h3 class="day-title">📅 Segunda à Sexta</h3>
+                
+                <div class="route-item">
+                    <span class="route-dest">Saída N1:</span>
+                    <span class="route-times"><span class="badge">05:45</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Via N2:</span>
+                    <span class="route-times">
+                        <span class="badge">05:50</span> <span class="badge">08:10</span> <span class="badge">10:10</span> <span class="badge">12:00</span> <span class="badge">15:00</span> <span class="badge">18:10</span> <span class="badge">19:10</span>
+                    </span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Carro Reserva (Saída de Tulio - N1 para a cidade):</span>
+                    <span class="route-times"><span class="badge">06:10</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Via N2 saindo da faculdade (FACAPE):</span>
+                    <span class="route-times"><span class="badge">22:10</span> <small>(refere-se ao horário das 19:10)</small></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Sem rota especificada:</span>
+                    <span class="route-times">
+                        <span class="badge">06:30</span> <span class="badge">07:00</span> <span class="badge">09:10</span> <span class="badge">11:00</span> <span class="badge">13:00</span> <span class="badge">14:00</span> <span class="badge">16:00</span> <span class="badge">17:00</span>
+                    </span>
+                </div>
+
+                <!-- Destaque da Observação -->
+                <div class="alert-box">
+                    <strong>⚠️ Observação sobre o horário das 22:10 (Segunda à Sexta):</strong>
+                    Os horários das <strong>22:10</strong> nos dias de semana só funcionam durante o período de aula das faculdades e em dias que se tem aulas. Em caso de feriados, pode não haver esse horário. Para saber mais, entre em contato com a associação.
+                </div>
+            </div>
+
+            <!-- SÁBADO -->
+            <div class="day-group">
+                <h3 class="day-title">📅 Sábado</h3>
+                
+                <div class="route-item">
+                    <span class="route-dest">Saída N1:</span>
+                    <span class="route-times"><span class="badge">06:00</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Via N2:</span>
+                    <span class="route-times">
+                        <span class="badge">06:00</span> <span class="badge">08:30</span> <span class="badge">14:30</span> <span class="badge">18:00</span>
+                    </span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Sem rota especificada:</span>
+                    <span class="route-times">
+                        <span class="badge">07:00</span> <span class="badge">08:00</span> <span class="badge">09:30</span> <span class="badge">10:30</span> <span class="badge">11:50</span> <span class="badge">12:50</span> <span class="badge">13:30</span> <span class="badge">15:30</span> <span class="badge">16:30</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- DOMINGO -->
+            <div class="day-group">
+                <h3 class="day-title">📅 Domingo</h3>
+                
+                <div class="route-item">
+                    <span class="route-dest">Via N2 (Volta feira Ouro Preto):</span>
+                    <span class="route-times"><span class="badge">06:00</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Feira Ouro Preto (Ida/Volta):</span>
+                    <span class="route-times"><span class="badge">09:00</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Via N2 (Ida/Volta):</span>
+                    <span class="route-times"><span class="badge">12:00</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Via N2:</span>
+                    <span class="route-times"><span class="badge">18:00</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Sem rota especificada:</span>
+                    <span class="route-times"><span class="badge">15:00</span></span>
+                </div>
+            </div>
+
+            <!-- FERIADOS -->
+            <div class="day-group">
+                <h3 class="day-title">📅 Feriados</h3>
+                
+                <div class="route-item">
+                    <span class="route-dest">Via N2:</span>
+                    <span class="route-times"><span class="badge">06:00</span> <span class="badge">12:00</span> <span class="badge">18:00</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Sem rota especificada:</span>
+                    <span class="route-times"><span class="badge">09:00</span> <span class="badge">15:00</span></span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- NOTAS DE RODAPÉ -->
+        <div class="footer-notes">
+            <h3>📌 Observações Importantes</h3>
+            <ul>
+                <li>A planilha não possui uma coluna de "destino final" como a anterior; a coluna "Rota" indica apenas o caminho ou ponto de passagem (ex.: "Via N2").</li>
+                <li>O horário <strong>22:10</strong> na planilha parece ser uma anotação descritiva do horário das <strong>19:10</strong> (saindo da FACAPE), e não uma saída independente.</li>
+                <li>As abas "Sábado", "Domingo" e "Feriados" da planilha estão vazias; todos os dados estão concentrados na aba "Dias úteis", que já subdivide os dias.</li>
+                <li><strong>Atenção (22:10):</strong> Conforme informado, o horário das 22:10 nos dias de semana só funciona durante o período de aula das faculdades e em dias letivos. Em feriados, pode não haver esse horário. Para mais informações, entre em contato com a associação.</li>
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>
