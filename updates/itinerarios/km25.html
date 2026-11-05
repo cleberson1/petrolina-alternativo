@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerário - Projeto Maria Tereza</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .section-title {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px 8px 0 0;
+            margin-top: 30px;
+            font-size: 1.2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-top: none;
+        }
+
+        .day-group {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .day-group:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .day-title {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .day-title::before {
+            content: "📅";
+        }
+
+        .route-item {
+            margin-bottom: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .route-dest {
+            font-weight: bold;
+            color: var(--primary-color);
+            min-width: 150px; /* Mantém os destinos alinhados */
+        }
+
+        .route-times {
+            color: #444;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #e8f4fd;
+            color: var(--secondary-color);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin: 2px;
+            font-weight: 500;
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 600px) {
+            .route-dest {
+                min-width: 100%;
+                margin-bottom: 2px;
+            }
+            h1 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Horários por Destino</h1>
+            <p class="subtitle">Projeto Maria Tereza KM-25</p>
+        </header>
+
+        <!-- SEÇÃO PETROLINA -->
+        <h2 class="section-title">Saídas de Petrolina (Destino Final)</h2>
+        <div class="card">
+            
+            <div class="day-group">
+                <h3 class="day-title">Segunda à Sexta</h3>
+                
+                <div class="route-item">
+                    <span class="route-dest">Até a Vila:</span>
+                    <span class="route-times">
+                        <span class="badge">06:10</span> <span class="badge">07:10</span> <span class="badge">09:00</span> <span class="badge">09:45</span> <span class="badge">11:15</span> <span class="badge">12:00</span> <span class="badge">13:10</span> <span class="badge">16:30</span> <span class="badge">17:00</span> <span class="badge">18:15</span>
+                    </span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Para Todos (Geral):</span>
+                    <span class="route-times"><span class="badge">05:20</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Até o R-4:</span>
+                    <span class="route-times"><span class="badge">08:00</span> <span class="badge">10:30</span> <span class="badge">15:50</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Até o R-4/21:</span>
+                    <span class="route-times"><span class="badge">12:30</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Até o 19/22:</span>
+                    <span class="route-times"><span class="badge">13:50</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Até o R-5:</span>
+                    <span class="route-times"><span class="badge">14:30</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Até o A-20:</span>
+                    <span class="route-times"><span class="badge">15:10</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Até o Aluno:</span>
+                    <span class="route-times"><span class="badge">22:00</span></span>
+                </div>
+            </div>
+
+            <div class="day-group">
+                <h3 class="day-title">Sábado</h3>
+                
+                <div class="route-item">
+                    <span class="route-dest">Até a Vila:</span>
+                    <span class="route-times">
+                        <span class="badge">07:00</span> <span class="badge">08:00</span> <span class="badge">09:00</span> <span class="badge">09:45</span> <span class="badge">10:30</span> <span class="badge">11:15</span> <span class="badge">12:30</span> <span class="badge">17:00</span> <span class="badge">18:00</span>
+                    </span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Para Todos (Geral):</span>
+                    <span class="route-times"><span class="badge">05:20</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Até o R-4:</span>
+                    <span class="route-times"><span class="badge">12:00</span> <span class="badge">16:00</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Até o 19/22:</span>
+                    <span class="route-times"><span class="badge">13:30</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Até o R-5:</span>
+                    <span class="route-times"><span class="badge">14:30</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Até o A-20:</span>
+                    <span class="route-times"><span class="badge">15:10</span></span>
+                </div>
+            </div>
+
+            <div class="day-group">
+                <h3 class="day-title">Domingo e Feriados</h3>
+                
+                <div class="route-item">
+                    <span class="route-dest">Até a Vila:</span>
+                    <span class="route-times">
+                        <span class="badge">07:00</span> <span class="badge">08:30</span> <span class="badge">10:00</span> <span class="badge">11:30</span> <span class="badge">13:00</span> <span class="badge">14:30</span> <span class="badge">17:30</span>
+                    </span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Até o R-4:</span>
+                    <span class="route-times"><span class="badge">16:00</span></span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SEÇÃO KM-25 -->
+        <h2 class="section-title">Saídas do KM-25 (Pontos de Partida)</h2>
+        <div class="card">
+            
+            <div class="day-group">
+                <h3 class="day-title">Segunda à Sexta</h3>
+                
+                <div class="route-item">
+                    <span class="route-dest">Saídas para a Vila:</span>
+                    <span class="route-times">
+                        <span class="badge">05:50</span> <span class="badge">06:20</span> <span class="badge">08:00</span> <span class="badge">08:45</span> <span class="badge">09:30</span> <span class="badge">10:15</span> <span class="badge">11:15</span> <span class="badge">12:45</span> <span class="badge">13:30</span> <span class="badge">14:30</span> <span class="badge">15:50</span> <span class="badge">18:00</span>
+                    </span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Saídas para R-4:</span>
+                    <span class="route-times"><span class="badge">06:30</span> <span class="badge">12:00</span> <span class="badge">17:25</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Saídas para A-20:</span>
+                    <span class="route-times"><span class="badge">06:50</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Saídas para 19/22:</span>
+                    <span class="route-times"><span class="badge">07:10</span> <span class="badge">16:40</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Saídas para R-5/21:</span>
+                    <span class="route-times"><span class="badge">07:30</span></span>
+                </div>
+            </div>
+
+            <div class="day-group">
+                <h3 class="day-title">Sábado</h3>
+                
+                <div class="route-item">
+                    <span class="route-dest">Saídas para a Vila:</span>
+                    <span class="route-times">
+                        <span class="badge">06:00</span> <span class="badge">08:00</span> <span class="badge">09:00</span> <span class="badge">10:00</span> <span class="badge">10:45</span> <span class="badge">11:30</span> <span class="badge">12:15</span> <span class="badge">13:30</span>
+                    </span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Saídas para R-4:</span>
+                    <span class="route-times"><span class="badge">06:30</span> <span class="badge">18:00</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Saídas para A-20:</span>
+                    <span class="route-times"><span class="badge">06:50</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Saídas para 19/22:</span>
+                    <span class="route-times"><span class="badge">07:10</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Saídas para R-5:</span>
+                    <span class="route-times"><span class="badge">07:30</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Saídas para VILA/19/22:</span>
+                    <span class="route-times"><span class="badge">15:00</span></span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Saídas para R-5/A-20:</span>
+                    <span class="route-times"><span class="badge">16:40</span></span>
+                </div>
+            </div>
+
+            <div class="day-group">
+                <h3 class="day-title">Domingo e Feriados</h3>
+                
+                <div class="route-item">
+                    <span class="route-dest">Saídas para a Vila:</span>
+                    <span class="route-times">
+                        <span class="badge">07:00</span> <span class="badge">08:30</span> <span class="badge">10:00</span> <span class="badge">11:30</span> <span class="badge">13:00</span> <span class="badge">14:30</span> <span class="badge">16:00</span> <span class="badge">17:30</span>
+                    </span>
+                </div>
+
+                <div class="route-item">
+                    <span class="route-dest">Saídas para R-4:</span>
+                    <span class="route-times"><span class="badge">06:40</span></span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
