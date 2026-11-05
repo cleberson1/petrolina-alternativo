@@ -32,7 +32,7 @@
       "origem": "Ponto Final (Centro)",
       "destino": "Assentamento Mandacaru",
       "empresa": "COOPERTRANSSERTÃO",
-      "itinerario_html": "terminal_cohab.html",
+      "itinerario_html": "nenhum.html",
       "observacao": "",
       "horarios": {
         "uteis":   ["06:00", "08:50", "12:00", "15:00", "17:00"],
@@ -46,7 +46,7 @@
       "destino": "N6, N7, N9 e C3 - Via C1",
       "empresa": "ATAPE",
       "itinerario_html": "terminal_cohab.html",
-      "observacao": "A viagem dura em média 1h a partir da saída do ponto final",
+      "observacao": "Os horários das 22:20 nos dias de semana só funciona durante o período de aula das faculdades e dias que se tem aulas, em caso de feriados pode não haver esse horário, para saber mais sobre entre em contato com a associação.",
       "horarios": {
         "uteis":   ["04:50", "05:40", "06:00", "06:50", "08:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:10"],
         "sabado":  ["06:00", "08:00", "10:00", "12:00", "14:00", "17:00", "18:00"],
@@ -59,7 +59,7 @@
       "destino": "N6, N7, N9 e C3 - Via N9",
       "empresa": "ATAPE",
       "itinerario_html": "terminal_cohab.html",
-      "observacao": "A viagem dura em média 1h a partir da saída do ponto final",
+      "observacao": "Os horários das 22:20 nos dias de semana só funciona durante o período de aula das faculdades e dias que se tem aulas, em caso de feriados pode não haver esse horário, para saber mais sobre entre em contato com a associação.",
       "horarios": {
         "uteis":   ["05:30", "06:15", "07:00", "09:00", "10:20", "11:20", "12:20", "13:20", "14:20", "15:20", "16:20", "17:20", "18:20", "22:20"],
         "sabado":  ["06:00", "07:00", "09:00", "11:00", "13:00", "15:00", "16:00"],
@@ -84,7 +84,7 @@
       "origem": "C1, N1, N2 e N3",
       "destino": "Ponto Final (Centro)",
       "empresa": "ATPI Projetos",
-      "observacao": "Os horários das 22:10 nos dias de semana só funciona durante o período de aula das faculdades e dias que se tem aulas, em caso de feriados pode não haver esse horário, para saber mais sobre entre em contato com a associação.",
+      "observacao": "",
       "itinerario_html": "terminal_cohab.html",
       "horarios": {
         "uteis":   ["05:45", "06:10"],
